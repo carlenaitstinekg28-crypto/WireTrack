@@ -1,0 +1,107 @@
+# 文件路径配置
+# paths:
+#   image_folder: "D:/CloudProject/Test/Images/Images1"
+#   pcd_folder: "D:/CloudProject/Test/pcd"
+#   poses_file: "D:/CloudProject/Test/pcd/lidar_poses.txt"
+#   results_folder: "D:/CloudProject/Test/results"
+paths:
+  image_folder: "D:/CloudProject/Test/wire_tracking_results/Images"
+  pcd_folder: "D:/CloudProject/Test/wire_tracking_results/pcd"
+  poses_file: "D:/CloudProject/Test/wire_tracking_results/pcd/lidar_poses.txt"
+  results_folder: D:/CloudProject/Test/results"
+
+# 功能开关
+flags:
+  auto_play_next_frame: false   # 建议开启以便自动跑完
+  save_results: false           # 开启保存最终PCD
+  show_all_history_points: true
+  show_current_frame_points: true
+  use_inliers_only: true
+  show_background_points: false
+  enable_geometry_correction: false
+  
+# === 新增：高级过滤参数 (基于分析结果) ===
+filter:
+  enable: true             # 是否在保存前启用过滤
+  min_z: -100             # 高度下限
+  max_z: 100              # 高度上限
+  min_linearity: 0.75      # 线性度阈值 (0~1)
+  radius: 0.5              # 计算几何特征的搜索半径 (米)
+  min_intensity: -1.0       # 强度阈值 (预留，默认设低一点防止误杀)
+
+  use_direction_filter: true
+  reference_vector: [-0.6436, -0.7603, 0.0878]  
+  max_angle_deviation: 40.0
+
+
+visualization:
+  window_width: 640
+  window_height: 480
+  window_top: 50
+
+# 相机参数
+camera:
+  K: 
+    - [585.66589314, 0.0, 667.89856769]
+    - [0.0, 585.86219907, 497.23997262]
+    - [0.0, 0.0, 1.0]
+  dist_coeffs:
+    - [-0.00807459374]
+    - [-0.0125883855]
+    - [-6.07756222e-05]
+    - [-0.000594227869]
+    - [0.00177673691]
+  rotation_vector:
+    - [1.5886839840276452]
+    - [0.0146042540851960]
+    - [-0.1566961977922777]
+  translation_vector:
+    - [0.1177288088773227]
+    - [-0.6324846169427136]
+    - [-0.0331380987357165]
+
+
+
+# 图像分割参数
+segmentation:
+  canny_thresh1: 50
+  canny_thresh2: 150
+  gaussian_blur_ksize: 3
+  grabcut_iter: 5
+  display_widen: 10
+  alpha: 0.6
+  outline_thickness: 1
+  outline_color: [0, 128, 0]
+  fill_color: [0, 255, 0]
+  auto_seed_radius: 15
+  min_auto_points: 10
+  auto_grow_angle_diff: 45
+  search_radius: 30
+  erosion_start_point_count: 13500
+  min_mask_block_size: 50
+
+# 点云投影参数
+point_cloud:
+  point_radius: 2
+  point_color: [0, 0, 255]
+  history_point_color: [255, 0, 0]
+  point_alpha: 0.8
+
+# 导线跟踪参数
+wire_tracking:
+  wire_point_dist_thresh: 0.2
+  min_curve_points: 20
+
+# 自动播放参数
+auto_play:
+  auto_play_delay: 0.1
+
+propagation:
+    enable: true
+    max_iterations: 10
+    step_size: 1
+    search_radius: 5
+    local_pca_window: 15
+    max_angle_deviation: 30
+    fill_color: [0, 255, 255]
+    outline_color: [0, 200, 200]
